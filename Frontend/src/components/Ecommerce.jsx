@@ -1,0 +1,84 @@
+import React from "react";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { Link } from "react-router-dom";
+
+const Ecommerce = () => {
+  const { ref, inView } = useInView({
+    triggerOnce: false,
+    threshold: 0.2,
+  });
+
+  // Define slide-in animation variants
+  const slideInLeftVariant = {
+    hidden: { x: "-50%", opacity: 0 },
+    visible: { x: 0, opacity: 1, transition: { duration: 0.7 } },
+    exit: { x: "-50%", opacity: 0, transition: { duration: 0.6 } },
+  };
+
+  const slideInRightVariant = {
+    hidden: { x: "50%", opacity: 0 },
+    visible: { x: 0, opacity: 1, transition: { duration: 0.7 } },
+    exit: { x: "50%", opacity: 0, transition: { duration: 0.6 } },
+  };
+
+  return (
+    <div className="flex items-center justify-center my-8 md:my-16 p-4 md:p-6 transform translate-y-60 md:translate-y-36">
+      <div
+        ref={ref}
+        className="w-full max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-40 p-6 md:p-10"
+      >
+        {/* Image Section (Hidden in Mobile) */}
+        <motion.div
+          className="w-full md:w-1/2 overflow-hidden rounded-2xl shadow-lg border-4 border-green-400 p-2 hidden md:block"
+          variants={slideInLeftVariant}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          exit="exit"
+        >
+          <img
+            src="/image/ecom.png"
+            alt="Ecommerce Store"
+            className="w-full h-auto md:h-56 object-cover rounded-xl"
+          />
+        </motion.div>
+
+        {/* Text Section with Background Image in Mobile */}
+        <motion.div
+          className="w-full md:w-1/2 text-center md:text-left bg-white bg-opacity-20 p-6 rounded-xl shadow-lg border-4 border-green-400 
+          bg-[url('/image/ecom.png')] bg-cover bg-center md:bg-none"
+          variants={slideInRightVariant}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          exit="exit"
+        >
+          <h2
+            className="text-2xl md:text-4xl font-bold text-green-500 mb-4 text-center md:text-left"
+            style={{
+              textShadow:
+                "2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000",
+            }}
+          >
+            Ecommerce Store
+          </h2>
+
+          <p className="text-white leading-relaxed text-sm md:text-lg mb-6">
+            Online platform to buy your fertilizers at a lower price.
+          </p>
+
+          {/* Centered Button */}
+          <div className="flex justify-center">
+            <Link
+              to="/services"
+              className="bg-gradient-to-r from-yellow-400 to-lime-400 bg-[length:300%_300%] animate-movingGradient text-black font-bold px-6 py-2 rounded-full shadow-lg transition-all duration-300 active:scale-90 hover:opacity-90"
+            >
+              Click Here
+            </Link>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+};
+
+export default Ecommerce;
