@@ -12,11 +12,11 @@ const CropYieldPrediction = () => {
   });
 
   const [prediction, setPrediction] = useState("Predicted Crop Yield");
-  const [imagePath, setImagePath] = useState(""); // ✅ To store the crop image path
+  const [imagePath, setImagePath] = useState("");
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    
+
     if (window.innerWidth >= 768) {
       document.body.style.overflow = "hidden";
     } else {
@@ -54,15 +54,18 @@ const CropYieldPrediction = () => {
 
       const data = await response.json();
       if (data.predicted_crop_yield) {
-        const predictedCrop = data.predicted_crop_yield.toLowerCase().replace(/\s+/g, "_"); // ✅ Format crop name
+        const predictedCrop = data.predicted_crop_yield
+          .toLowerCase()
+          .replace(/\s+/g, "_");
         setPrediction(`Predicted Yield: ${data.predicted_crop_yield}`);
-        setImagePath(`/crops/${predictedCrop}.jpg`); // ✅ Image path from public folder
+        setImagePath(`/crops/${predictedCrop}.jpg`);
 
-        if (window.innerWidth < 768) {
-          setTimeout(() => {
-            window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-          }, 300);
-        }
+        setTimeout(() => {
+          window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth",
+          });
+        }, 300);
       } else {
         console.error(data.error);
       }
@@ -72,8 +75,7 @@ const CropYieldPrediction = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center min-h-screen bg-white bg-opacity-5 bg-cover bg-center overflow-auto md:-translate-y-8">
-      {/* Left Side: Prediction Form */}
+    <div className="flex flex-col md:flex-row justify-center items-center min-h-screen bg-white bg-opacity-5 bg-cover bg-center overflow-auto md:overflow-hidden md:-translate-y-8">
       <div className="bg-white bg-opacity-40 p-8 rounded-lg shadow-lg w-full md:w-2/3 max-w-2xl md:mr-4">
         <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">
           Crop Yield Prediction
@@ -125,7 +127,7 @@ const CropYieldPrediction = () => {
                 required
               />
             </div>
-            
+
             <div>
               <label className="block font-semibold">Phosphorus (P):</label>
               <input
@@ -175,14 +177,17 @@ const CropYieldPrediction = () => {
         </form>
       </div>
 
-      {/* Right Side: Result Zone */}
-      <div className="result-zone flex justify-center items-center w-64 h-64 border-4 border-dashed border-black md:translate-x-32 md:-translate-y-20 rounded-lg p-4 translate-y-10 text-center">
+      <div className="result-zone flex justify-center items-center w-64 h-64 border-4 border-dashed border-black md:translate-x-32 md:-translate-y-20 rounded-lg p-4 translate-y-3 text-center">
         {imagePath && (
-          <img src={imagePath} alt="Predicted Crop" className="w-56 h-56 object-cover rounded-lg shadow-lg" />
+          <img
+            src={imagePath}
+            alt="Predicted Crop"
+            className="w-56 h-56 object-cover rounded-lg shadow-lg"
+          />
         )}
       </div>
-      
-      <div className="mt-6 md:mt-4 md:w-64 p-3 bg-yellow-200 text-center rounded-lg shadow-md md:-translate-x-32 md:translate-y-28 translate-y-14">
+
+      <div className="mt-6 md:mt-4 md:w-64 p-3 bg-yellow-200 text-center rounded-lg shadow-md md:-translate-x-32 md:translate-y-28 translate-y-2">
         <p className="text-lg font-bold text-gray-800">{prediction}</p>
       </div>
     </div>

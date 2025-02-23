@@ -47,5 +47,3 @@ def get_crop_yield():
     prediction = crop_yield_model.predict(input_data)[0]
     return jsonify({'predicted_crop_yield': prediction})
 
-if __name__ == '__main__':
-    app.run(debug=True)

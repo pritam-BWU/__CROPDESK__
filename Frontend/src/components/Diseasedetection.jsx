@@ -63,12 +63,11 @@ const Diseasedetection = () => {
 
           {/* Centered Button */}
           <div className="flex justify-center">
-            <Link
-              to="/services"
-              className="bg-gradient-to-r from-yellow-400 to-lime-400 bg-[length:300%_300%] animate-movingGradient text-black font-bold px-6 py-2 rounded-full shadow-lg transition-all duration-300 active:scale-90 hover:opacity-90"
-            >
-              Click Here
-            </Link>
+          <Link
+           to="/disease-detection"
+            className="bg-gradient-to-r from-yellow-400 to-lime-400 bg-[length:300%_300%] animate-movingGradient text-black font-bold px-6 py-2 rounded-full shadow-lg transition-all duration-300 active:scale-90 hover:opacity-90">
+            Click Here
+         </Link>
           </div>
         </motion.div>
       </div>

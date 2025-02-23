@@ -14,6 +14,8 @@ import CropYieldPrediction from './components/CropYieldPrediction';
 import Wpr from './components/Wpr';
 import About from './pages/About';
 import ContactMe from './pages/ContactMe';
+import DiseaseD from './components/DiseaseD';
+import Diseasedetection from './components/Diseasedetection';
 
 const App = () => {
   const [activePage, setActivePage] = useState("");  // 🔹 Add useState for active page
@@ -35,7 +37,8 @@ const App = () => {
         <Route path="/crop-yield" element={<CropYieldPrediction />} />
         <Route path="/wpr" element={<Wpr />} />
         <Route path="/contactMe" element={<ContactMe setActivePage={setActivePage} />} /> 
-        {/* 🔹 Pass setActivePage here */}
+        <Route path="/disease-detection" element={<DiseaseD />} />  {/* 🔹 Add Route for DiseaseD component */}
+        
       </Routes>
     </div>
   );
